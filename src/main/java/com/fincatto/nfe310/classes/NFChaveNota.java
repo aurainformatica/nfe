@@ -5,6 +5,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import org.joda.time.LocalDateTime;
+
+import com.fincatto.nfe310.classes.nota.NFNotaInfo;
+import com.fincatto.nfe310.classes.nota.NFNotaInfoIdentificacao;
+
 public class NFChaveNota {
 
 	private final String chave;
@@ -65,9 +70,29 @@ public class NFChaveNota {
 						"$1 $2 $3 $4 $5 $6 $7 $8 $9 $10 $11");
 	}
 	
+	public String getChave() {
+		return chave;
+	}
+	
 	@Override
 	public String toString() {
 		return "NFe" + this.chave;
+	}
+	
+	public static NFChaveNota fromInfo(NFNotaInfo info) {
+		NFNotaInfoIdentificacao identificacao = info.getIdentificacao();
+		LocalDateTime emissao = identificacao.getDataHoraEmissao();
+		
+		return new Builder()
+			.withCnpjEmitente(info.getEmitente().getCnpj())
+			.withCodigoNumerico(identificacao.getCodigoRandomico())
+			.withDataEmissao(YearMonth.of(emissao.getYear(), emissao.getMonthOfYear()))
+			.withFormaEmissao(identificacao.getTipoEmissao())
+			.withNFModelo(identificacao.getModelo())
+			.withNFUnidadeFederativa(identificacao.getUf())
+			.withNumero(identificacao.getCodigoRandomico())
+			.withSerie(identificacao.getSerie())
+			.build();			
 	}
 	
 	public static NFChaveNota fromString(final String chave){
