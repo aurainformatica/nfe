@@ -1,6 +1,6 @@
 Nota Fiscal Eletrônica
 ===
-Comunicador de nota fiscal da [fazenda](http://www.nfe.fazenda.gov.br/portal/principal.aspx).<br/><<<<<<< HEAD
+Comunicador de nota fiscal da [fazenda](http://www.nfe.fazenda.gov.br/portal/principal.aspx).<br/>
 [![Build Status](https://travis-ci.org/aurainformatica/nfe.svg)](https://travis-ci.org/aurainformatica/nfe)
 
 ## Atenção
